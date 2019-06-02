@@ -400,6 +400,12 @@ if(!isset($_SESSION['id'])){
             <i class="fa fa-th"></i> <span>Manejar Tracking</span>
           </a>
         </li>
+        
+        <li>
+          <a href="./?p=pagos">
+            <i class="fa fa-th"></i> <span>Pagos</span>
+          </a>
+        </li>
       </ul>
     </section>
     <!-- /.sidebar -->

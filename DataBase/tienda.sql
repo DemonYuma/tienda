@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-04-2019 a las 03:22:09
+-- Tiempo de generación: 01-06-2019 a las 03:47:00
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.3.0
 
@@ -55,6 +55,13 @@ CREATE TABLE `carro` (
   `cant` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Volcado de datos para la tabla `carro`
+--
+
+INSERT INTO `carro` (`id`, `id_cliente`, `id_producto`, `cant`) VALUES
+(8, 1, 2, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -93,7 +100,9 @@ CREATE TABLE `clientes` (
 --
 
 INSERT INTO `clientes` (`id`, `username`, `password`, `name`) VALUES
-(1, 'boscan', '123456', 'Anyelber');
+(1, 'boscan', '123456', 'Anyelber'),
+(3, 'anyelber', 'anyelber', 'Anyelber'),
+(6, 'test', 'test', 'test');
 
 -- --------------------------------------------------------
 
@@ -114,8 +123,32 @@ CREATE TABLE `compra` (
 --
 
 INSERT INTO `compra` (`id`, `id_cliente`, `fecha`, `monto`, `estado`) VALUES
-(3, 1, '2019-02-24 12:39:04', 16400, 1),
-(4, 1, '2019-04-12 20:03:40', 1360, 0);
+(8, 1, '2019-05-22 18:03:44', 1360, 1),
+(9, 1, '2019-05-29 22:31:14', 2360, 0),
+(10, 1, '2019-05-29 23:02:19', 2860, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pagos`
+--
+
+CREATE TABLE `pagos` (
+  `id` int(11) NOT NULL,
+  `id_cliente` int(11) NOT NULL,
+  `id_compra` int(11) NOT NULL,
+  `comprobante` varchar(255) NOT NULL,
+  `nombre` varchar(50) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `estado` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `pagos`
+--
+
+INSERT INTO `pagos` (`id`, `id_cliente`, `id_compra`, `comprobante`, `nombre`, `fecha`, `estado`) VALUES
+(4, 1, 8, '01055363.png', 'Anyelber Boscan', '2019-05-22 18:05:53', 1);
 
 -- --------------------------------------------------------
 
@@ -169,7 +202,22 @@ INSERT INTO `productos_compra` (`id`, `id_compra`, `id_producto`, `cantidad`, `m
 (4, 3, 2, 4, 200),
 (5, 3, 1, 4, 1000),
 (6, 4, 5, 1, 400),
-(7, 4, 7, 1, 1000);
+(7, 4, 7, 1, 1000),
+(8, 5, 5, 1, 400),
+(9, 5, 4, 1, 1000),
+(10, 5, 7, 1, 1000),
+(11, 6, 5, 1, 400),
+(12, 7, 7, 1, 1000),
+(13, 7, 2, 1, 200),
+(14, 7, 1, 1, 1000),
+(15, 8, 7, 1, 1000),
+(16, 8, 5, 1, 400),
+(17, 9, 7, 2, 1000),
+(18, 9, 5, 1, 400),
+(19, 10, 5, 1, 400),
+(20, 10, 4, 1, 1000),
+(21, 10, 7, 1, 1000),
+(22, 10, 1, 1, 1000);
 
 --
 -- Índices para tablas volcadas
@@ -206,6 +254,12 @@ ALTER TABLE `compra`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `pagos`
+--
+ALTER TABLE `pagos`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
@@ -231,7 +285,7 @@ ALTER TABLE `admins`
 -- AUTO_INCREMENT de la tabla `carro`
 --
 ALTER TABLE `carro`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `categorias`
@@ -243,12 +297,18 @@ ALTER TABLE `categorias`
 -- AUTO_INCREMENT de la tabla `clientes`
 --
 ALTER TABLE `clientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT de la tabla `pagos`
+--
+ALTER TABLE `pagos`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
@@ -261,7 +321,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `productos_compra`
 --
 ALTER TABLE `productos_compra`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

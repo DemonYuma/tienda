@@ -12,13 +12,13 @@ if(isset($enviar)){
 	$q = $mysqli->query("SELECT * FROM clientes WHERE username = '$username'");
 
 	if(mysqli_num_rows($q)>0){
-		alert("El usuario ya está en uso");
-		redir("");
+		alert("El usuario ya está en uso",0,'registro');
+		die();
 	}
 
 	if($password != $cpassword){
-		alert("Las contraseñas no coinciden");
-		redir("");
+		alert("Las contraseñas no coinciden",0,'registro');
+		die();
 	}
 
 
@@ -32,11 +32,9 @@ if(isset($enviar)){
 
 	$_SESSION['id_cliente'] = $r['id'];
 
-	alert("Te has registrado satisfactoriamente");
-
-	redir("./");
-
-
+	alert("Te has registrado satisfactoriamente",1,'principal');
+	die();
+	//redir("./");
 
 }
 	?>
@@ -45,7 +43,7 @@ if(isset($enviar)){
 	<center>
 		<form method="post" action="">
 			<div class="centrar_login">
-				<label><h2><i class="fa fa-key"></i> Iniciar Sesión</h2></label>
+				<label><h2><i class="fa fa-key"></i> Registrate</h2></label>
 				<div class="form-group">
 					<input type="text" autocomplete="off" class="form-control" placeholder="Usuario" name="username"/>
 				</div>

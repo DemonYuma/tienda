@@ -29,12 +29,23 @@ function redir($var){
 	die();
 }
 
-function alert($var){
-	?>
-	<script type="text/javascript">
-		alert("<?=$var?>");
-	</script>
-	<?php
+function alert($txt,$type,$url){
+
+	//"error", "success" and "info".
+
+	if($type==0){
+		$t = "error";
+	}elseif($type==1){
+		$t = "success";
+	}elseif($type==2){
+		$t = "info";
+	}else{
+		$t = "info";
+	}
+
+	echo '<script>swal({ title: "Alerta", text: "'.$txt.'", icon: "'.$t.'"});';
+	echo '$(".swal-button").click(function(){ window.location="?p='.$url.'"; });';
+	echo '</script>';
 }
 
 function check_user($url){
@@ -88,7 +99,7 @@ function estado($id_estado){
 		if($id_estado == 0){
 			$status = "Iniciando";
 		}elseif($id_estado==1){
-			$status = "Preparaondo";
+			$status = "Preparando";
 		}elseif($id_estado == 2){
 			$status = "Despachando";
 		}elseif($id_estado == 3){
@@ -110,6 +121,22 @@ function admin_name_connected(){
 	$r = mysqli_fetch_array($q);
 
 	return $r['name'];
+
+}
+
+function estado_pago($estado){
+
+	if($estado==0){
+		$estado = "Sin Verificar";
+	}elseif($estado==1){
+		$estado = "Verificado y Aprobado";
+	}elseif($estado==2){
+		$estado = "Reembolsado";
+	}else{
+		$estado = "Sin Verificar";
+	}
+
+	return $estado;
 
 }
 ?>
